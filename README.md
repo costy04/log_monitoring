@@ -4,13 +4,13 @@
     • Pytest installed (pip install pytest==8.4.1)
 ## How to use
 ```bash
-To run the file: python main.py
+To run the file: python main.py (for the default input file) or python main.py -i path_to_input_file
 The main.py takes a CSV file as an input and writes in another .txt file (log.txt) the output
 To run the unit tests: pytest unit_testing.py
 ```
 
 ```bash
-A file logs.log is required in the same directory as the application and the structure needs to be as follows:
+By default the application will import a file named logs.log from the same directory as the application but the user can provide a path to another file. The file structure needs to be as follows:
     • HH:MM:SS is a timestamp in hours, minutes, and seconds.
     • The job description.
     • Each log entry is either the “START” or “END” of a process.
