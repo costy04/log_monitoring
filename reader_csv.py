@@ -32,6 +32,8 @@ def read_and_parse_csv(input_path: str) -> pd.core.groupby.generic.DataFrameGrou
     if not invalid_rows.empty:
         data = data.drop(invalid_rows.index)
 
+    # Group the DataFrame by 'PID' and 'Description' becuase two different processes can have 
+    # the same PID at a different point in time
     grouped = data.groupby(["PID", "Description"])
-    
+
     return grouped
