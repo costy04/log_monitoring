@@ -1,5 +1,5 @@
 from processor_csv import log_processor
-from reader_csv import read_and_parse_csv
+from reader_writer_csv import read_and_parse_csv
 
 
 def test_csv(tmp_path):

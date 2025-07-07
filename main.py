@@ -1,6 +1,5 @@
-from reader_csv import read_and_parse_csv
+from reader_writer_csv import read_and_parse_csv, write_logs
 from processor_csv import log_processor
-import writer_csv
 import argparse
 
 
@@ -17,7 +16,7 @@ def main ():
     if data_grouped is not None:
         log_messages = log_processor(data_grouped)
     if log_messages:
-       writer_csv.write_logs(log_messages)
+       write_logs(log_messages)
        
 if __name__ == "__main__":
     main()

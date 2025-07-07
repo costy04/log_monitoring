@@ -1,5 +1,14 @@
 import pandas as pd
 
+def get_status_based_on_duration(duration_minutes: float) -> str:
+    # This function classifies the process status based on the duration in minutes.
+    if duration_minutes >= 10:
+        return "ERROR"
+    elif duration_minutes >= 5:
+        return "WARNING"
+    else:
+        return "OK"
+
 def log_processor(data_grouped: pd.core.groupby.generic.DataFrameGroupBy) -> list[str]:
     # This function processes the grouped data and generates log messages based on the duration of processes.
 
@@ -41,17 +50,12 @@ def log_processor(data_grouped: pd.core.groupby.generic.DataFrameGroupBy) -> lis
                 continue
 
             # Calculate the duration in minutes
-            duration = (end_time - start_time)
-            duration_minutes = duration.total_seconds() / 60
+            duration_minutes = (end_time - start_time).total_seconds() / 60
+            
             description = start_rows['Description'].iloc[0]
 
             # Classify process based on duration thresholds
-            if duration_minutes >= 10:
-                status = "ERROR"
-            elif duration_minutes >= 5:
-                status = "WARNING"
-            else:
-                status = "OK"
+            status = get_status_based_on_duration(duration_minutes)
 
             log_messages.append(f"{status}: Process {description} with PID {pid} ended after {duration_minutes:.2f} minutes")
 

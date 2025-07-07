@@ -37,3 +37,9 @@ def read_and_parse_csv(input_path: str) -> pd.core.groupby.generic.DataFrameGrou
     grouped = data.groupby(["PID", "Description"])
 
     return grouped
+
+
+def write_logs(logs):
+    with open("log.txt", "w") as log_file:
+        for row in logs:
+            log_file.write(f"{row}\n")
