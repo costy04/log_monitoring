@@ -29,8 +29,8 @@ OK: Process scheduled task 521 with PID 64591 ended after 1.83 minutes
 OK: Process scheduled task 080 with PID 67833 ended after 3.58 minutes
 ERROR: Process scheduled task 182 with PID 70808 ended after 33.72 minutes
 WARNING: Process scheduled task 074 with PID 71766 ended after 5.78 minutes
-ERROR: Process scheduled task 074 with PID 72029 didn't end
-ERROR: Process scheduled task 074 with PID 72897 didn't end
+ERROR: Process scheduled task 333 with PID 72029 didn't end
+ERROR: Process scheduled task 016 with PID 72897 didn't end
 OK: Process scheduled task 173 with PID 75164 ended after 1.07 minutes
 ERROR: Process background job wmy with PID 81258 ended after 14.77 minutes
 OK: Process background job wiy with PID 81470 ended after 1.05 minutes

@@ -6,8 +6,8 @@ def log_processor(data_grouped: pd.core.groupby.generic.DataFrameGroupBy) -> lis
     log_messages = []
 
     # Iterate through each group in the grouped data
-    for pid, group in data_grouped:
-        print(f"Processing PID: {pid}")
+    for (pid, description), group in data_grouped:
+        print(f"Processing PID: {pid} and Description: {group['Description'].iloc[0] if not group.empty else 'N/A'}")
         print("Group size: %d" % len(group))
 
         if pid is None or pid == 'nan':

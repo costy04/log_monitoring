@@ -26,6 +26,12 @@ def read_and_parse_csv(input_path: str) -> pd.core.groupby.generic.DataFrameGrou
         print(f"Error reading CSV file: {e}")
         return None
     remove_extra_spaces(data)
-    data['Timestamp'] = pd.to_datetime(data['Timestamp'], format='%H:%M:%S')
-    grouped = data.groupby("PID")
+    data['Timestamp'] = pd.to_datetime(data['Timestamp'], format='%H:%M:%S', errors='coerce')
+
+    invalid_rows = data[data['Timestamp'].isna()]
+    if not invalid_rows.empty:
+        data = data.drop(invalid_rows.index)
+
+    grouped = data.groupby(["PID", "Description"])
+    
     return grouped
