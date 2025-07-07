@@ -17,10 +17,23 @@ def log_processor(data_grouped: pd.core.groupby.generic.DataFrameGroupBy) -> lis
         start_rows = group[group['Status'] == 'START']
         end_rows = group[group['Status'] == 'END']
 
+        # Proceed only if START exists without an END
+        if not start_rows.empty and end_rows.empty:
+            #If multiple STARTs exist, take the first one showed (decided by the timestamp)
+            first_start = start_rows.nsmallest(1, 'Timestamp')
+            start_time = first_start['Timestamp'].iloc[0]
+            log_messages.append(f"ERROR: Process {description} with PID {pid} didn't end")
+            continue
+
         # Proceed only if both START and END exist
         if not start_rows.empty and not end_rows.empty:
-            start_time = start_rows['Timestamp'].iloc[0]
-            end_time = end_rows['Timestamp'].iloc[0]
+
+            # If multiple STARTs and multiple ENDs exist, take the first START and the first END showed (decided by the timestamp)
+            first_start = start_rows.nsmallest(1, 'Timestamp')
+            first_end = end_rows.nsmallest(1, 'Timestamp')
+
+            start_time = first_start['Timestamp'].iloc[0]
+            end_time = first_end['Timestamp'].iloc[0]
 
             # Skip if the end time is before the start time (invalid case)
             if start_time > end_time:
